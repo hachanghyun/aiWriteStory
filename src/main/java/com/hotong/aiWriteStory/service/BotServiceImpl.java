@@ -44,10 +44,11 @@ public class BotServiceImpl implements BotService {
                 this.buildHttpEntity(
                         new ChatGptRequest(
                                 ChatGptConfig.MODEL,
-                                botRequest.getMessage(),
+                                botRequest.getContent(),
                                 ChatGptConfig.TEMPERATURE,
                                 ChatGptConfig.MAX_TOKEN,
-                                ChatGptConfig.TOP_P)));
+                                ChatGptConfig.TOP_P
+                        )));
     }
 }
 
