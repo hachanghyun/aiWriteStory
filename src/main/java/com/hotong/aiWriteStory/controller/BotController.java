@@ -5,14 +5,13 @@ import com.hotong.aiWriteStory.dto.ChatGptResponse;
 import com.hotong.aiWriteStory.service.BotService;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/bot")
+@RequestMapping("/api")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*") // 허용할 도메인을 지정합니다.
 public class BotController {
 
     private final BotService botService;
@@ -20,6 +19,13 @@ public class BotController {
     @PostMapping("/send")
     public ChatGptResponse sendMessage(@RequestBody BotRequest botRequest) {
         return botService.askQuestion(botRequest);
+    }
+
+    @GetMapping("/hello")
+    //@CrossOrigin(origins = {"http://localhost:19000","http://172.30.1.31:8081"}) // 허용할 도메인을 지정합니다.
+    @CrossOrigin(origins = "*") // 허용할 도메인을 지정합니다.
+    public ResponseEntity<String> hello() {
+        return ResponseEntity.ok("드디어 통신됫다!!!!!!!!!!!!!!");
     }
 }
 
